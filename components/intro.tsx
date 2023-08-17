@@ -1,17 +1,22 @@
 "use client";
 
-import Image from 'next/image';
 import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { HiDownload } from 'react-icons/hi';
+import { BsArrowRight, BsGithub, BsLinkedin } from 'react-icons/bs';
 
 import photo from '@/public/headshot.jpg';
-import Link from 'next/link';
-import { BsArrowRight, BsGithub, BsLinkedin } from 'react-icons/bs';
-import { HiDownload } from 'react-icons/hi';
+import { useSectionInView } from '@/lib/hooks';
+import { useActiveSectionContext } from '@/context/active-section-context';
 
 export default function Intro() {
+  const { ref } = useSectionInView("Home", 0.5);
+  const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext()
+
   return (
-    <section className="mb-28 max-w-[50rem] text-center sm:mb-0">
+    <section ref={ref} id="home" className="mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]">
       <div className="flex items-center justify-center">
         <div className="relative">
           <motion.div
@@ -82,6 +87,10 @@ export default function Intro() {
             active:scale-105
             transition-all
           "
+          onClick={() => {
+            setActiveSection("Contact");
+            setTimeOfLastClick(Date.now());
+          }}
         >
           Contact me here <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" /> 
         </Link>
@@ -101,13 +110,13 @@ export default function Intro() {
             active:scale-105
             transition-all
             cursor-pointer
-            border
-            border-black/10
+            borderBlack
+            dark:bg-white/10
           "
-          href="/CV.pdf"
+          href="/resume.pdf"
           download
         >
-          Download CV <HiDownload className="opacity-60 group-hover:translate-y-1 transition"/>
+          Resume <HiDownload className="opacity-60 group-hover:translate-y-1 transition"/>
         </a>
         <a
           className="
@@ -124,8 +133,9 @@ export default function Intro() {
             active:scale-105
             transition-all
             cursor-pointer
-            border
-            border-black/10
+            borderBlack
+            dark:bg-white/10
+            dark:text-white/60
           " 
           href="https://www.linkedin.com/in/roberthoover00/"
         >
@@ -147,8 +157,9 @@ export default function Intro() {
             active:scale-105
             transition-all
             cursor-pointer
-            border
-            border-black/10
+            borderBlack
+            dark:bg-white/10
+            dark:text-white/60
           " 
           href="https://github.com/Gambarou"
         >
