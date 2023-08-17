@@ -76,7 +76,7 @@ export default function RootLayout({
             {children}
             <Footer />
 
-            <Toaster position="top-right" />
+            <Toaster position="bottom-right" />
             <ThemeSwitch />
           </ActiveSectionContextProvider>
         </ThemeContextProvider>
